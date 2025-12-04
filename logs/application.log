@@ -1,0 +1,18 @@
+2025-12-04 10:00:00,123 INFO  [main] com.example.App: Application started successfully.
+2025-12-04 10:05:23,456 INFO  [http-nio-8080-exec-1] com.example.AuthController: User 'john_doe' logged in.
+2025-12-04 10:15:12,789 ERROR [http-nio-8080-exec-3] com.example.CheckoutService: Error processing order #12345
+java.lang.NullPointerException: Cannot invoke "com.example.PaymentGateway.process(double)" because "this.paymentGateway" is null
+	at com.example.CheckoutService.processOrder(CheckoutService.java:45)
+	at com.example.CheckoutController.checkout(CheckoutController.java:30)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+2025-12-04 10:20:00,000 INFO  [http-nio-8080-exec-5] com.example.PageController: Serving about page.
+2025-12-04 10:30:00,111 ERROR [http-nio-8080-exec-7] com.example.DataService: Timeout waiting for database connection
+java.sql.SQLTransientConnectionException: Connection is not available, request timed out after 30000ms.
+	at com.zaxxer.hikari.pool.HikariPool.createTimeoutException(HikariPool.java:695)
+	at com.zaxxer.hikari.pool.HikariPool.getConnection(HikariPool.java:197)
+	at com.zaxxer.hikari.pool.HikariPool.getConnection(HikariPool.java:162)
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:128)
+	at com.example.DataService.fetchData(DataService.java:25)

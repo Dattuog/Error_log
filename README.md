@@ -57,3 +57,37 @@ This project is an automated log analysis tool that uses Google's Gemini API to 
 -   `logs/`: Directory for input log files.
 -   `.env`: Configuration file for API keys (not in repo).
 -   `generated_log_report.*`: Output reports.
+
+## System Design & Workflow
+
+The following diagram illustrates the workflow of the AI-Powered Log Analyzer:
+
+```mermaid
+graph TD
+    A[Start] --> B{Check Configuration};
+    B -- Missing API Key --> C[Error: Exit];
+    B -- Config OK --> D[Read Log Files];
+    D --> E{For Each Log File};
+    E --> F[Read Content];
+    F --> G[Construct Prompt];
+    G --> H[Call Gemini API (gemini-2.0-flash)];
+    H --> I[Receive Analysis];
+    I --> J[Store Results];
+    J --> E;
+    E -- All Files Processed --> K[Generate Markdown Report];
+    K --> L[Convert to PDF];
+    L --> M[End];
+```
+
+### Workflow Steps
+
+1.  **Initialization**: The script starts and checks for the `GEMINI_API_KEY` in the environment variables (loaded from `.env`).
+2.  **Data Ingestion**: It iterates through the predefined log files (`web_server.log`, `database.log`, `application.log`) in the `logs/` directory.
+3.  **AI Analysis**:
+    -   For each file, it constructs a prompt acting as a generic System Administrator.
+    -   It sends the log content to the **Google Gemini 2.0 Flash** model.
+    -   The model identifies critical errors, root causes, and solutions.
+4.  **Report Generation**:
+    -   The analysis results are compiled into a structured **Markdown** report.
+    -   The Markdown report is then converted into a professional **PDF** document using `xhtml2pdf`.
+

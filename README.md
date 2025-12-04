@@ -70,7 +70,7 @@ graph TD
     D --> E{For Each Log File};
     E --> F[Read Content];
     F --> G[Construct Prompt];
-    G --> H[Call Gemini API (gemini-2.0-flash)];
+    G --> H["Call Gemini API (gemini-2.0-flash)"];
     H --> I[Receive Analysis];
     I --> J[Store Results];
     J --> E;
